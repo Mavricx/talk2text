@@ -1,19 +1,23 @@
 let element = document.querySelector(".text");
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = "en-IN";
+recognition.lang = "hi-IN";
 recognition.continuous = true;
 const mic = document.querySelector(".mp");
 const stop = document.querySelector(".stop");
 const copy = document.querySelector(".copy");
 
 copy.addEventListener("click", () => {
-    element.select();
-    document.execCommand("copy");
+   
+    navigator.clipboard.writeText(element.value).then(()=>{
+        alert("Text copied to clipboard");
+    }).catch((error)=>{
+        console.log("copy failed: " + error)
+    })
 });
 
 
 mic.addEventListener("click", () => { recognition.start(); });
-stop.addEventListener("click", () => { recognition.stop(); })
+stop.addEventListener("click", () => { recognition.stop(); });
 
 recognition.onresult = (event) => {
     let transcript = "";

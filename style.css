@@ -1,4 +1,9 @@
-body {
-  background-color: black;
+body{
+display: flex;
+justify-content: center;
 }
-
+.here{
+    margin-top:35vh;
+    width: 75%;
+    
+}

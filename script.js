@@ -5,6 +5,7 @@ recognition.continuous = true;
 const mic = document.querySelector(".mp");
 const stop = document.querySelector(".stop");
 const copy = document.querySelector(".copy");
+const clear = document.querySelector(".clear");
 
 copy.addEventListener("click", () => {
 
@@ -26,3 +27,7 @@ recognition.onresult = (event) => {
     }
     element.value += transcript;
 };
+
+clear.addEventListener("click", () => {
+    element.value = "";
+})

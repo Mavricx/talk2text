@@ -1,11 +1,12 @@
 let element = document.querySelector(".text");
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-recognition.lang = "en-IN";
+
 recognition.continuous = true;
 const mic = document.querySelector(".mp");
 const stop = document.querySelector(".stop");
 const copy = document.querySelector(".copy");
 const clear = document.querySelector(".clear");
+const lang=document.getElementById("language");
 
 copy.addEventListener("click", () => {
 
@@ -17,7 +18,9 @@ copy.addEventListener("click", () => {
 });
 
 
-mic.addEventListener("click", () => { recognition.start(); });
+mic.addEventListener("click", () => {
+    recognition.lang = lang.value;
+    recognition.start(); });
 stop.addEventListener("click", () => { recognition.stop(); });
 
 recognition.onresult = (event) => {

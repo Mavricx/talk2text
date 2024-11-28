@@ -1,12 +1,11 @@
 let element = document.querySelector(".text");
 const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-
 recognition.continuous = true;
 const mic = document.querySelector(".mp");
 const stop = document.querySelector(".stop");
 const copy = document.querySelector(".copy");
 const clear = document.querySelector(".clear");
-const lang=document.getElementById("language");
+const lang = document.getElementById("languages");
 
 copy.addEventListener("click", () => {
 
@@ -19,8 +18,14 @@ copy.addEventListener("click", () => {
 
 
 mic.addEventListener("click", () => {
-    recognition.lang = lang.value;
-    recognition.start(); });
+    if (recognition && lang) {
+        recognition.lang = lang.value || "en-IN";
+        recognition.start();
+    }
+    else {
+        console.log("Error in recognition or language");
+    }
+});
 stop.addEventListener("click", () => { recognition.stop(); });
 
 recognition.onresult = (event) => {
@@ -30,7 +35,9 @@ recognition.onresult = (event) => {
     }
     element.value += transcript;
 };
-
+recognition.onerror = (event) => {
+    console.log("Error occurred in recognition: " + event.error);
+}
 clear.addEventListener("click", () => {
     element.value = "";
 })
